@@ -30,8 +30,9 @@ class DashboardViewModel @Inject constructor(
     val dataList2 = _dataList2.asStateFlow()
     private suspend fun loadSuperheroes2() {
         val movies = movieRepository.getMoviesData()
-        _dataList2.update {
+        /*_dataList2.update {
             movies
-        }
+        }*/
+        _dataList2.emit(movies)
     }
 }
