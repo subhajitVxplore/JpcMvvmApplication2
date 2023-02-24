@@ -7,12 +7,7 @@ import okio.IOException
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class MovieRepositoryImpl @Inject constructor(
-    private val movies: MovieApi
-) : MovieRepository {
-
- 
-
+class MovieRepositoryImpl @Inject constructor(private val movies: MovieApi) : MovieRepository {
     override suspend fun getMoviesData(): Movies? {
         return try {
             val result = movies.getPopularMovies("69d66957eebff9666ea46bd464773cf0")

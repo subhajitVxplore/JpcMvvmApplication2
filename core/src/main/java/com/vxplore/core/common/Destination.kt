@@ -15,6 +15,7 @@ sealed class Destination(protected val route: String, vararg arguments: Any) {
         operator fun invoke(): String = route
     }
 
+    object Splash : NoArgumentsDestination(AppRoutes.SPLASH)
     object Login : NoArgumentsDestination(AppRoutes.LOGIN)
     object Dashboard : NoArgumentsDestination(AppRoutes.DASHBOARD)
 

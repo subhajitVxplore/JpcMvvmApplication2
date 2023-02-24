@@ -1,13 +1,14 @@
 package com.vxplore.jpcmvvmapplication.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -26,7 +27,6 @@ fun DashboardScreen(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-
         content = { paddingValues ->
             Column(
                 modifier = Modifier.padding(paddingValues),
@@ -34,6 +34,7 @@ fun DashboardScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                StateFlowList2(viewModel =viewModel)
+
             }
         },
 
@@ -44,9 +45,15 @@ fun DashboardScreen(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun StateFlowList2(viewModel: DashboardViewModel) {
-
-    val moviedata = viewModel.dataList2.collectAsState()
-    if (moviedata.value!= null) {
+   // val moviedata = viewModel.dataList2.collectAsState()
+    val moviedata = viewModel.movies
+    if (viewModel.loader.value) {
+        Column( modifier = Modifier.fillMaxWidth().fillMaxHeight().padding(16.dp).background(color = Color.White), verticalArrangement = Arrangement.Center,horizontalAlignment = Alignment.CenterHorizontally) {
+            //.shadow(elevation = 10.dp, shape = RoundedCornerShape(8.dp))
+            CircularProgressIndicator()
+        }
+    }
+    else{
         LazyColumn {
             items(
                 moviedata.value!!.results,
@@ -84,6 +91,9 @@ fun StateFlowList2(viewModel: DashboardViewModel) {
         }
     }
 
+
 }
+
+
 
 
